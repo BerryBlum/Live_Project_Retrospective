@@ -3,7 +3,7 @@ Initially no user option to select all payperiods in the current year up to the 
 Upon creation also added function to populate the begin and end dates with current year pay period
 start start and most recent pay period end date.
 
-* EmployerDefault-
+** EmployerDefault-
 The Employer had no default page and they had their pathing updated to default to the employee index.
 
 ** ErorrStyling-
