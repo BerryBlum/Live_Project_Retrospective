@@ -1,0 +1,9 @@
+    /*validation errors for date pickers*/
+.input-validation-error {
+    border-color: #ff8080;
+}
+
+.field-validation-error {
+    font-size: 12px;
+    color: #ff8080;
+}

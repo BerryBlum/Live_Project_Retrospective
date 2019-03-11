@@ -1,0 +1,36 @@
+@*Populates Work Time Event Dropdown with each work period
+    Saves first run through instance of StartDate to yearStartDate
+    and last run through EndDate to yearEndDate to populate the All Year data-start and data-end*@
+<select name="PayPeriod" class="form-control" style="margin-bottom:5px" id="pay-period">
+   
+    @{var selectedpp = ViewBag.selectedpayperiod; }
+    @{DateTime yearEndDate = new DateTime();
+        bool first = true;
+        DateTime yearStartDate = new DateTime();}
+    @{foreach (ScheduleUsers.Models.PayPeriod pp in Model)
+        {
+            var endDate = pp.StartDate.AddDays(pp.PayPeriodLength);
+            var ppstring = pp.StartDate.ToShortDateString() + " - " + endDate.ToShortDateString();
+            
+
+            if (ppstring == selectedpp)
+            {
+                <option selected="selected" id="pay-period-option" data-start="@pp.StartDate.ToString("yyyy-MM-dd")" data-end="@endDate.ToString("yyyy-MM-dd")"> @pp.StartDate.ToShortDateString()  - @endDate.ToShortDateString()  </option>
+            }
+            else
+            {
+                <option id="pay-period-option" data-start="@pp.StartDate.ToString("yyyy-MM-dd")" data-end="@endDate.ToString("yyyy-MM-dd")"> @pp.StartDate.ToShortDateString() - @endDate.ToShortDateString() </option>
+            }
+            if (first == true)
+            {
+                yearStartDate = pp.StartDate;
+            }
+            first = false;
+            if(Model.Last() == pp)
+            {
+                yearEndDate = endDate;
+            }
+        }
+    }
+    <option id="pay-period-option" data-start="@yearStartDate.ToString("yyyy-MM-dd")" data-end="@yearEndDate.ToString("yyyy-MM-dd")">All Year</option>
+</select>

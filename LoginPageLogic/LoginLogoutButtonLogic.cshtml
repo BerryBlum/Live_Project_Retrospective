@@ -1,0 +1,13 @@
+<div class="form-group text-center">
+     <div class="col-md-offset-1 col-md-10">
+         <input type="submit" class="login-button clockInOutBtn" value="Clock In" onclick="VerifyUserForClock()" formaction="javascript:VerifyUserForClock()" formmethod="post" />
+         @if (ViewData["FullName"] != null)
+         {
+             <a class="login-button" href="javascript:document.getElementById('logoutForm').submit()">Log Off</a>
+         }
+         else
+         {
+          <input type="submit" class="login-button" value="Log In"/>
+         }
+    </div>
+</div>

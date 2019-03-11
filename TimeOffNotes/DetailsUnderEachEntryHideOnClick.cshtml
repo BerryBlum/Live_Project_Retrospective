@@ -1,0 +1,70 @@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.End)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActiveSchedule)
+        </th>
+    </tr>
+@* Populates the cells underneath the associated headings with data
+    from the TimeOffEvent model associated with each instance of a 
+    time off request. Has separate function call to hide or show
+    relecant notes underneath each instance of requests*@
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.End)
+            </td>
+            <td>
+                @{if (item.ActiveSchedule == null)
+                    {
+                        <p>Pending</p>
+                    }
+                    else if (item.ActiveSchedule == true)
+                    {
+                        <p>Approved</p>
+                    }
+                    else
+                    {
+                        <p>Denied</p>
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.EventID }) |
+                <a href="#" onclick="ExpandDetails('@item.EventID')">Details</a> |
+                @Html.ActionLink("Delete", "Delete", new { id = item.EventID })
+
+            </td>
+        </tr>
+        <tr>
+            <td id="@item.EventID" style="border-top: none; display: none">
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+        </tr>
+    }
+</table>
+
+@* Function that when called changes the display property
+    between none and block when clicked   *@
+
+<script>
+    function ExpandDetails(id)
+    {
+        var details = document.getElementById(id);
+        if (details.style.display === 'none' ) {
+            details.style.display = 'block';
+        }
+        else if (details.style.display === 'block' ) {
+            details.style.display = 'none';
+        }
+    }
+</script>
